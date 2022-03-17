@@ -14,37 +14,70 @@
     <div class="full-width-split group">
       <div class="full-width-split__one">
         <div class="full-width-split__inner">
-          <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
+          <h2 class="headline headline--small-plus t-center">Prochains &Eacute;vénements</h2>
 
-          <div class="event-summary">
-            <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month">Mar</span>
-              <span class="event-summary__day">25</span>
-            </a>
-            <div class="event-summary__content">
-              <h5 class="event-summary__title headline headline--tiny"><a href="#">Poetry in the 100</a></h5>
-              <p>Bring poems you&rsquo;ve wrote to the 100 building this Tuesday for an open mic and snacks. <a href="#" class="nu gray">Learn more</a></p>
-            </div>
-          </div>
-          <div class="event-summary">
-            <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month">Apr</span>
-              <span class="event-summary__day">02</span>
-            </a>
-            <div class="event-summary__content">
-              <h5 class="event-summary__title headline headline--tiny"><a href="#">Quad Picnic Party</a></h5>
-              <p>Live music, a taco truck and more can found in our third annual quad picnic day. <a href="#" class="nu gray">Learn more</a></p>
-            </div>
-          </div>
+          <?php
+            // Lesson #28 - Displaying CPT Events > new WP Query
+            // Lesson #32 - Our Custom Query
+            $today = date( 'Ymd' );
+            $homepageEvents = new WP_Query( array(
+              'posts_per_page' => 2, // -1 will return ALL
+              'post_type' => 'event',
+              'meta_key'  => 'event_beginning_date',
+              'orderby'   => 'meta_value', // 'rand' for RANDOM, 'title' for alphabetical order following event title
+              'type'      => 'DATE', // Course bug fixed with 'meta_value' (not 'meta_value_num') and this new line with 'type' => 'DATE',
+              'order'     => 'ASC', // WP default is 'DESC'
+              'meta_query'=> array( // Totally NEW to me : used here to filter events in the PAST or NOT !
+                array( // 'meta_query' needs an INNER ARRAY per filter condition
+                  'key'   => 'event_beginning_date',  // field key
+                  'compare' => '>=', // < ou = 
+                  'value' => $today, // to current date ? simplier with a $today variable (code easier to read)
+                  'type'  => 'DATE',
+                ) 
+              )
+            ));
 
-          <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+            while( $homepageEvents->have_posts() ) {
+              $homepageEvents->the_post(); ?>
+                <!-- HTML for displaying data in the query -->
+                <div class="event-summary">
+                  <a class="event-summary__date t-center" href="#">
+                    <span class="event-summary__day"><?php 
+                      // Coding with Brad to retrieve MONTH from the 'Ymd' output of the custom field - Lesson #30
+                      $eventBeginning = new DateTime( get_field( 'event_beginning_date', false, false ) ); // DateTime is a Class, by default returns CURRENT Date & Time 
+                      echo $eventBeginning->format( 'd' );
+                    ?>
+                    </span>
+                    <span class="event-summary__month"><?php 
+                      echo $eventBeginning->format( 'M' ); // affiche l'abréviation en anglais > HOW for FRENCH ?
+                    ?></span>
+                  </a>
+                  <div class="event-summary__content">
+                    <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+                    <p><?php if( has_excerpt() ) { // OR the_excerpt EITHER 18 first words from the_content
+                        echo get_the_excerpt();
+                         } 
+                        else {
+                          echo wp_trim_words( get_the_content(), 18 );
+                        } ?>
+                        <a href="<?php the_permalink(); ?>" class="nu gray">En savoir plus &raquo;</a></p>
+                  </div>
+                </div>
+
+            <?php
+            }
+
+            ?>
+
+            <!-- BUTTON All Events > get_post_type_archive_link( 'post_type_name' ) -->
+          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link( 'event' ); ?>" class="btn btn--blue">&Eacute;vénements à venir &raquo;</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
         <div class="full-width-split__inner">
-          <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
+          <h2 class="headline headline--small-plus t-center">Articles récents</h2>
 
-          <?php // our first custom query
+          <?php // our first custom query - Lesson #24
             $latestposts = new WP_Query(array(
               // no number at the beginning of the var name
               // associative array made with the WP_Query to interrogate ($args)
@@ -75,7 +108,13 @@
                     </a>
                     <div class="event-summary__content">
                       <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h5>
-                      <p><?php echo wp_trim_words( get_the_content(), 18 ) ?><a href="<?php the_permalink() ?>" class="nu gray">Lire la suite</a></p>
+                      <p><?php if( has_excerpt() ) { // SPECIAL Brad's Tip
+                        echo get_the_excerpt(); // replace the_excerpt() that has 'space around'.
+                         } 
+                        else {
+                          echo wp_trim_words( get_the_content(), 18 );
+                        } ?>
+                        <a href="<?php the_permalink(); ?>" class="nu gray">Lire la suite &raquo;</a></p>
                     </div>
                   </div>
 
@@ -105,7 +144,8 @@
             </div>
           </div> -->
 
-          <p class="t-center no-margin"><a href="<?php echo site_url('/blog'); ?>" class="btn btn--yellow">View All Blog Posts</a></p>
+          <!-- BUTTON View all Blog posts : echo site_url( '/blog' ) -->
+          <p class="t-center no-margin"><a href="<?php echo site_url('/blog'); ?>" class="btn btn--yellow">Tous les Articles &raquo;</a></p>
         </div>
       </div>
     </div>
