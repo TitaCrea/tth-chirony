@@ -29,9 +29,9 @@
     </div>
 
     <?php
-      $relatedDisciplines = new WP_Query( array(
+      $relatedEnseignants = new WP_Query( array(
         'posts_per_page' => -1, // -1 will return ALL
-        'post_type' => 'discipline',
+        'post_type' => 'enseignant',
         'orderby'   => 'title', // 'rand' for RANDOM, 'title' for alphabetical order following event title
         'order'     => 'ASC', // WP default is 'DESC'
         'meta_query'=> array( // Totally NEW to me : used here to filter events in the PAST or NOT !
@@ -44,15 +44,15 @@
         )
       ));
 
-      if ($relatedDisciplines->have_posts() ) {
+      if ($relatedEnseignants->have_posts() ) {
 
         echo '<hr class="section-break">';
         echo '<h2 class="headline headline--medium" >Infos ++</h2>';
 
-        while( $relatedDisciplines->have_posts() ) {
-          $relatedDisciplines->the_post(); ?>
+        while( $relatedEnseignants->have_posts() ) {
+          $relatedEnseignants->the_post(); ?>
             <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><br>
-              En savoir plus sur la discipline enseignée par <?php the_field('discipline_teacher'); ?>.</li>
+              En savoir plus sur l'enseignant.e <?php the_field('enseignant_name'); ?>.</li>
 
         <?php
         }

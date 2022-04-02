@@ -10,7 +10,7 @@
     <div class="page-banner__content container container--narrow">
       <h1 class="page-banner__title"><?php the_title(); ?></h1>
       <div class="page-banner__intro">
-        <p>Enseignement de <strong><?php the_field('discipline_teacher'); ?></strong></p>
+        <p>Enseignement de <strong><?php the_field('enseignant_name'); ?></strong></p>
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="one-third">
           <?php the_post_thumbnail( ); ?>
-          <p>avec <?php the_field('discipline_teacher'); ?></p>
+          <p>avec <?php the_field('enseignant_name'); ?></p>
         </div>
       </div>
 
