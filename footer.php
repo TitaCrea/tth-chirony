@@ -3,7 +3,7 @@
         <div class="group">
           <div class="site-footer__col-one">
             <h1 class="school-logo-text school-logo-text--alt-color">
-              <a href="<?php echo site_url() ?>"><strong>La Nature</strong> aux Pattes</a>
+              <a href="<?php echo site_url() ?>"><strong>Amicale &Eacute;questre</strong><br>Vall&eacute;e de Joux</a>
             </h1>
             <p><a class="site-footer__link" href="#">555.555.5555</a></p>
           </div>

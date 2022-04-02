@@ -4,9 +4,9 @@
   <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/ocean.jpg' ); ?>)"></div>
     <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">Welcome to our blog !</h1>
+      <h1 class="page-banner__title">Actualités</h1>
       <div class="page-banner__intro">
-        <p>Keep up with our latest news.</p>
+        <p>Soyez les premiers informés !</p>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 
         <div class="generic-content">
           <?php the_excerpt(); ?>
-          <p><a class="btn btn--blue" href="<?php the_permalink(); ?>">Continue reading &raquo;</a></p>
+          <p><a class="btn btn--blue" href="<?php the_permalink(); ?>">Lire la suite &raquo;</a></p>
         </div>
       </div>
 

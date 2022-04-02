@@ -10,7 +10,7 @@
       <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title"><?php the_title(); ?></h1>
         <div class="page-banner__intro">
-          <p>DON'T FORGET TO REPLACE ME LATER</p>
+          <p>Page statique > Sous-titre ==? custom field ?</p>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
       if ( $theParent ) { ?>
         <div class="metabox metabox--position-up metabox--with-home-link">
           <p>
-            <a class="metabox__blog-home-link" href="<?php echo get_permalink( $theParent ); ?>"><i class="dashicons dashicons-controls-back" aria-hidden="true"></i> Back to <?php echo get_the_title( $theParent ); ?></a> <span class="metabox__main"><?php the_title() ?></span>
+            <a class="metabox__blog-home-link" href="<?php echo get_permalink( $theParent ); ?>"><i class="dashicons dashicons-controls-back" aria-hidden="true"></i> <?php echo get_the_title( $theParent ); ?></a> <span class="metabox__main"><?php the_title() ?></span>
           </p>
         </div>
         <?php }

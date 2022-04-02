@@ -2,19 +2,19 @@
 ?>
 
     <div class="page-banner">
-      <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/library-hero.jpg') ?>;"></div>
+      <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/library-hero.png') ?>;"></div>
       <div class="page-banner__content container t-center c-white">
-        <h1 class="headline headline--large">Welcome!</h1>
-        <h2 class="headline headline--medium">We think you&rsquo;ll like it here.</h2>
-        <h3 class="headline headline--small">Why don&rsquo;t you check out the <strong>major</strong> you&rsquo;re interested in?</h3>
-        <a href="#" class="btn btn--large btn--blue">Find Your Major</a>
+        <h2 class="headline headline--medium">Amicale &Eacute;questre de la Vallée de Joux</h2>
+        <h1 class="headline headline--large">Bienvenue !</h1>
+        <h3 class="headline headline--small"></h3>
+        <a href="<?php echo get_post_type_archive_link('program'); ?>" class="btn btn--large btn--blue">ACTUEL ! Notre programme de cours</a>
       </div>
     </div>
 
     <div class="full-width-split group">
       <div class="full-width-split__one">
         <div class="full-width-split__inner">
-          <h2 class="headline headline--small-plus t-center">Prochains &Eacute;vénements</h2>
+          <h2 class="headline headline--small-plus t-center">20'22 : nous Jubilons !!</h2>
 
           <?php
             // Lesson #28 - Displaying CPT Events > new WP Query
@@ -33,6 +33,10 @@
                   'compare' => '>=', // < ou = 
                   'value' => $today, // to current date ? simplier with a $today variable (code easier to read)
                   'type'  => 'DATE',
+                ),
+                array( // ajout Tita : 2e Inner Array for the meta_query : seulement les 'events' dont le champ 'contenu-reserve' est vide == public
+                  'key'   => 'contenu-reserve',
+                  'compare' => 'NOT EXISTS',
                 ) 
               )
             ));
@@ -49,7 +53,7 @@
                     ?>
                     </span>
                     <span class="event-summary__month"><?php 
-                      echo $eventBeginning->format( 'M' ); // affiche l'abréviation en anglais > HOW for FRENCH ?
+                      echo __( $eventBeginning->format( 'M' ) ); // affiche l'abréviation en anglais > HOW for FRENCH ?
                     ?></span>
                   </a>
                   <div class="event-summary__content">
@@ -66,16 +70,16 @@
 
             <?php
             }
-
+            wp_reset_postdata();
             ?>
 
             <!-- BUTTON All Events > get_post_type_archive_link( 'post_type_name' ) -->
-          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link( 'event' ); ?>" class="btn btn--blue">&Eacute;vénements à venir &raquo;</a></p>
+          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link( 'event' ); ?>" class="btn btn--blue">Tout sur les Festivités 20'22 &raquo;</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
         <div class="full-width-split__inner">
-          <h2 class="headline headline--small-plus t-center">Articles récents</h2>
+          <h2 class="headline headline--small-plus t-center">Derniers articles du blog</h2>
 
           <?php // our first custom query - Lesson #24
             $latestposts = new WP_Query(array(

@@ -4,9 +4,9 @@
   <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/apples.jpg' ); ?>)"></div>
     <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">Prochaines Manifestations</h1>
+      <h1 class="page-banner__title">Festivités 20'22</h1>
       <div class="page-banner__intro">
-        <p>Venez nombreux admirer et rencontrer nos compagnons joueurs et sensibles.</p>
+        <p>Nous vous attendons nombreux pour célébrer avec nous les 20 ans de notre société.</p>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@
             ?>
             </span>
             <span class="event-summary__month"><?php 
-              echo $eventBeginning->format( 'M' ); // affiche l'abréviation en anglais > HOW for FRENCH ?
+              echo __( $eventBeginning->format( 'M' ) ); // affiche l'abréviation en anglais > HOW TO FRENCH ?
             ?></span>
           </a>
             <div class="event-summary__content">

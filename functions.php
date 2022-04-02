@@ -17,7 +17,7 @@ add_action('wp_enqueue_scripts', 'tthchirony_styles');
 function tthchirony_setup_theme() { 
   // hook 'after_setup_theme' : 
   add_theme_support( 'title-tag' ); // ajoute le titre du post à l'onglet du navigateur
-
+  add_theme_support( 'post-thumbnails' );
   // register_nav_menu( 'nameLocation', 'nameTitle' );
 }
 
@@ -47,6 +47,10 @@ function tthchirony_adjust_queries( $query ) { // WP will define an Object with 
         'compare' => '>=', 
         'value' => $today, // do not forget to declare this $today variable by copying its declaration too
         'type'  => 'DATE',
+      ),
+      array( // ajout Tita : 2e Inner Array for the meta_query : seulement les 'events' dont le champ 'contenu-reserve' est vide == public
+        'key'   => 'contenu-reserve',
+        'compare' => 'NOT EXISTS',
       ) 
       ));
   }
