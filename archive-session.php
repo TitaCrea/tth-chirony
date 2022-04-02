@@ -74,4 +74,3 @@
 
 <?php
 get_footer();
-?>
