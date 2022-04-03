@@ -4,7 +4,7 @@
 
   while(have_posts()) {
     the_post();
-    pageBanner( array( 'subtitle', 'photo')); ?>
+    pageBanner(); ?>
 
     <div class="container container--narrow page-section"> <!-- the breadcrumbs box lesson 15 -->
 

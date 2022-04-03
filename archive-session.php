@@ -1,15 +1,13 @@
 <?php get_header();
-  ?>
 
-  <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/apples.jpg' ); ?>)"></div>
-    <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">Prochains Cours</h1>
-      <div class="page-banner__intro">
-        <p>Dans le cadre de nos programmes, voici les prochaines sessions.</p>
-      </div>
-    </div>
-  </div>
+// Replace div.page-banner (hard coding) by pageBanner function (Lesson #46)
+
+pageBanner( array(
+  'altTitle' => 'Prochaines sessions',
+  'subtitle' => 'Dans le cadre de notre programme de cours, voici les prochaines dates agendées.',
+));
+
+?>
 
   <div class="container container--narrow page-section">
   <?php

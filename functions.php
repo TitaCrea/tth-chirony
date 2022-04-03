@@ -3,6 +3,16 @@
 // Dynamic Post/Page/CPT Banners
 function pageBanner($args = NULL) {
 
+  if (isset($args['altTitle'])) {
+    $args['altTitle'] = $args['altTitle'];
+  } else {
+    if (get_field( 'page_alternate_title' ) AND !is_home()) {
+      $args['altTitle'] = get_field('page_alternate_title');
+    } else {
+      $args['altTitle'] = get_the_title();
+    }
+  }
+
   if (isset($args['subtitle'])) {
     $args['subtitle'] = $args['subtitle'];
   } else {
@@ -12,10 +22,10 @@ function pageBanner($args = NULL) {
   if (isset($args['photo'])) {
     $args['photo'] = $args['photo'];
   } else {
-    if (get_field( 'page_background_image') and !is_archive() and !is_home()) {
+    if (get_field( 'page_background_image') AND !is_archive() AND !is_home()) {
       $args['photo'] = get_field( 'page_background_image' )['sizes']['pageBanner'];
     } else {
-      $args['photo'] = get_theme_file_uri( '/images/ocean.jpg' );
+      $args['photo'] = get_theme_file_uri( '/images/bus.jpg' );
     }
   }
 
@@ -30,7 +40,7 @@ function pageBanner($args = NULL) {
       url(<?php echo $args['photo']; ?>)">
     </div>
     <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title"><?php the_title(); ?></h1>
+      <h1 class="page-banner__title"><?php echo $args['altTitle']; ?></h1>
       <div class="page-banner__intro">
         <p><?php echo $args['subtitle']; ?></p>
       </div>

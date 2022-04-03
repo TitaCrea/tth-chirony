@@ -1,15 +1,11 @@
 <?php get_header();
-  ?>
 
-  <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/apples.jpg' ); ?>)"></div>
-    <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">Sessions terminées</h1>
-      <div class="page-banner__intro">
-        <p>Les cours, stages et séries qui ont eu lieu ces derniers mois.</p>
-      </div>
-    </div>
-  </div>
+  pageBanner(array(
+    'altTitle' => 'Sessions terminés', 
+    'subtitle' => 'Le lieu pour un feedback personnalisé.'
+  ));
+
+  ?>
 
   <div class="container container--narrow page-section">
 
@@ -62,11 +58,6 @@
         'total' => $pastSessions->max_num_pages,
     ));
   ?>
-
-  <hr class="section-break">
-    <div class="webdev webdev__notes">
-      A utiliser comme page d'entrée, 
-    </div>
 
   </div>
 
