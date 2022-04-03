@@ -6,6 +6,7 @@
               <a href="<?php echo site_url() ?>"><strong>Amicale &Eacute;questre</strong><br>Vall&eacute;e de Joux</a>
             </h1>
             <p><a class="site-footer__link" href="#">555.555.5555</a></p>
+            <p class="site-footer__text">Sauf mention, les photos d'illustration sont issues du site <a href="https://unsplash.com" target="_blank">Unsplash.com</a>. Vous en trouverez la liste nominative sur la page <a href='/credit-photos'>Crédit photos</a>.</p>
           </div>
 
           <div class="site-footer__col-two-three-group">

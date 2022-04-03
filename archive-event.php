@@ -1,15 +1,12 @@
 <?php get_header();
-  ?>
 
-  <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/apples.jpg' ); ?>)"></div>
-    <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title">Festivités 20'22</h1>
-      <div class="page-banner__intro">
-        <p>Nous vous attendons nombreux pour célébrer avec nous les 20 ans de notre société.</p>
-      </div>
-    </div>
-  </div>
+// Replace div.page-banner (hard coding) by pageBanner function (Lesson #46)
+pageBanner( array(
+  'altTitle' => 'Festivités 20&apos;22',
+  'subtitle' => 'Nous vous attendons nombreux pour célébrer avec nous les 20 ans de notre société.',
+));
+
+  ?>
 
   <div class="container container--narrow page-section">
   <?php

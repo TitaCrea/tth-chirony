@@ -4,3 +4,23 @@
     Version: 1.0    
 */
 
+.notes-webdev p {
+    color: #F95738 !important;
+}
+
+.page-banner__bg-image {
+    opacity: 0.48;
+}
+
+.site-footer__text {
+    color: #999;
+    display: block;
+    font-weight: 400;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 530px) {
+    .page-banner__title {
+        font-size: 4.2rem;
+    }
+}
