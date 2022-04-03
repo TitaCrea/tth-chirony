@@ -7,3 +7,7 @@
 .notes-webdev p {
     color: #F95738 !important;
 }
+
+.page-banner__bg-image {
+    opacity: 0.64;
+}

@@ -1,4 +1,43 @@
-<?php
+<?php 
+
+// Dynamic Post/Page/CPT Banners
+function pageBanner($args = NULL) {
+
+  if (isset($args['subtitle'])) {
+    $args['subtitle'] = $args['subtitle'];
+  } else {
+    $args['subtitle'] = get_field('page_subtitle');
+  }
+
+  if (isset($args['photo'])) {
+    $args['photo'] = $args['photo'];
+  } else {
+    if (get_field( 'page_background_image') and !is_archive() and !is_home()) {
+      $args['photo'] = get_field( 'page_background_image' )['sizes']['pageBanner'];
+    } else {
+      $args['photo'] = get_theme_file_uri( '/images/ocean.jpg' );
+    }
+  }
+
+
+
+
+  ?>
+
+  <div class="page-banner">
+    <div class="page-banner__bg-image" 
+      style="background-image: 
+      url(<?php echo $args['photo']; ?>)">
+    </div>
+    <div class="page-banner__content container container--narrow">
+      <h1 class="page-banner__title"><?php the_title(); ?></h1>
+      <div class="page-banner__intro">
+        <p><?php echo $args['subtitle']; ?></p>
+      </div>
+    </div>
+  </div>
+  <?php
+}
 
 function tthchirony_styles() {
   // hook 'wp_enqueue_scripts' :
