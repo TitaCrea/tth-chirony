@@ -47,16 +47,22 @@
       if ($relatedEnseignants->have_posts() ) {
 
         echo '<hr class="section-break">';
-        echo '<h2 class="headline headline--medium" >Infos ++</h2>';
+        echo '<h2 class="headline headline--medium" >Enseignant.e</h2>';
+        echo '<ul class="professor-cards">';
 
-        while( $relatedEnseignants->have_posts() ) {
+         while( $relatedEnseignants->have_posts() ) {
           $relatedEnseignants->the_post(); ?>
-            <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><br>
-              En savoir plus sur l'enseignant.e <?php the_field('enseignant_name'); ?>.</li>
-
+            <li class="professor-card__list-item">
+              <a class="professor-card" href="<?php the_permalink(); ?>">
+                <img class="professor-card__image" src="<?php the_post_thumbnail_url('professorLandscape'); ?>">
+                <span class="professor-card__name">
+                  <?php the_title(); ?>
+                </span>
+              </a>
+            </li>
         <?php
         }
-
+        echo '</ul>';
       }
 
       wp_reset_postdata();

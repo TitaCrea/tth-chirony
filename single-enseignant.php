@@ -6,11 +6,15 @@
     the_post(); ?>
 
   <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri( '/images/apples.jpg' ); ?>)"></div>
+    <div class="page-banner__bg-image" 
+      style="background-image: 
+      url(<?php $pageBckgrImage = get_field('page_background_image'); 
+      echo $pageBckgrImage['url']; ?>)">
+    </div>
     <div class="page-banner__content container container--narrow">
       <h1 class="page-banner__title"><?php the_title(); ?></h1>
       <div class="page-banner__intro">
-        <p>Enseignement de <strong><?php the_field('enseignant_name'); ?></strong></p>
+        <p><?php the_field('page_subtitle'); ?></p>
       </div>
     </div>
   </div>
@@ -26,39 +30,43 @@
           </p>
         </div> -->
     <div class="generic-content">
-      <div class="row group">
-        
+      <div class="row group">  
         <div class="two-thirds">
-          <?php the_content( ); ?>
-          <hr>
-          <?php the_field ('dummy_field'); ?>
+          <?php
+            $relatedPrograms = get_field('related_programs');
+            if ($relatedPrograms) {
+              echo '<p class="">Cours actuel(s) :</p>';
+              echo '<ul class="link-list min-list">';
+            
+            foreach($relatedPrograms as $program) { ?>
+                <li><a href="<?php echo get_the_permalink($program); ?>"><?php echo get_the_title($program); ?></a></li>
+              <?php }
+            
+              echo '</ul>';
+              echo '<hr class="section-break">';
+            }
+
+            the_content( );
+
+            wp_reset_postdata();
+          ?>
+
+
         </div>
+
         <div class="one-third">
-          <?php the_post_thumbnail( ); ?>
-          <p>avec <?php the_field('enseignant_name'); ?></p>
+          <?php the_post_thumbnail( 'professorPortrait' ); ?>
+          <p>Liens & références</p>
         </div>
       </div>
 
-      <?php
-        $relatedPrograms = get_field('related_programs');
-        if ($relatedPrograms) {
-          echo '<hr class="section-break">';
-          echo '<p class="">Cours actuel(s) :</p>';
-          echo '<ul class="link-list min-list">';
-          foreach($relatedPrograms as $program) { ?>
-            <li><a href="<?php echo get_the_permalink($program); ?>"><?php echo get_the_title($program); ?></a></li>
-          <?php }
-          echo '</ul>';
-        }
-        wp_reset_postdata();
-      ?>
 
     <hr class="section-break">
-      <p class="notes-webdev">
-        Note WEBDEV : créer bouton "inscription à la prochaine série"<br>
+      <div class="notes-webdev">
+        <p>Note WEBDEV : créer bouton "inscription à la prochaine série"<br>
         OU "il reste des places pour le prochain cours (ou série)"<br>
-        avec IF statement et/ou new WP_Query : si la prochaine série existe = si les inscriptions sont ouvertes, le bouton s'affiche et pointe vers le 'programme' suivant du même enseignant
-      </p>
+        avec IF statement et/ou new WP_Query : si la prochaine série existe = si les inscriptions sont ouvertes, le bouton s'affiche et pointe vers le 'programme' suivant du même enseignant.</p>
+      </div>
 
     </div>
   </div>

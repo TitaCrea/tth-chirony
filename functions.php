@@ -11,13 +11,21 @@ function tthchirony_styles() {
   wp_enqueue_style('tthchirony_extra_styles', get_theme_file_uri( '/build/index.css' ));
 }
 
-add_action('wp_enqueue_scripts', 'tthchirony_styles');
+add_action('wp_enqueue_scripts', 'tthchirony_styles', 10);
+
+function tth_dev_styles() {
+  wp_enqueue_style('tthchirony_dev_styles', get_theme_file_uri( 'style.css'));
+}
+add_action('wp_enqueue_scripts', 'tth_dev_styles', 100);
 
 
 function tthchirony_setup_theme() { 
   // hook 'after_setup_theme' : 
   add_theme_support( 'title-tag' ); // ajoute le titre du post à l'onglet du navigateur
   add_theme_support( 'post-thumbnails' );
+  add_image_size( 'professorLandscape', 400, 260, true);
+  add_image_size( 'professorPortrait', 480, 650, true);
+  add_image_size('pageBanner', 1500, 350, true);
   // register_nav_menu( 'nameLocation', 'nameTitle' );
 }
 
