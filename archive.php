@@ -9,7 +9,9 @@ if (is_category()) {
 }
 pageBanner(array(
   'altTitle' => $theTitle, 
-  'subtitle' => get_the_archive_description()
+  'subtitle' => get_the_archive_description(),
+  'photo' => get_theme_file_uri( '/images/apples-2.jpg' ),
+
 ));
 
 ?>

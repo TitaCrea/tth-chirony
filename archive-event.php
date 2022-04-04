@@ -11,27 +11,9 @@ pageBanner( array(
   <div class="container container--narrow page-section">
   <?php
     while( have_posts(  ) ) {
-      the_post(  ); ?>
-
-        <div class="event-summary">
-          <a class="event-summary__date t-center" href="#">
-            <span class="event-summary__day"><?php 
-              // Coding with Brad to retrieve MONTH from the 'Ymd' output of the custom field - Lesson #30
-              $eventBeginning = new DateTime( get_field( 'event_beginning_date', false, false ) ); // DateTime is a Class, by default returns CURRENT Date & Time 
-              echo $eventBeginning->format( 'd' );
-            ?>
-            </span>
-            <span class="event-summary__month"><?php 
-              echo __( $eventBeginning->format( 'M' ) ); // affiche l'abréviation en anglais > HOW TO FRENCH ?
-            ?></span>
-          </a>
-            <div class="event-summary__content">
-            <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-            <p><?php echo wp_trim_words( get_the_content(), 18 ); ?><a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
-            </div>
-        </div>
-
-    <?php
+      the_post(  ); 
+      
+      get_template_part( 'template-parts/content-event' );
     }
 
     echo paginate_links();

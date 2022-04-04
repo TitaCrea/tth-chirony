@@ -4,7 +4,9 @@
 
   while(have_posts()) {
     the_post(); 
-    pageBanner();
+    pageBanner( array(
+      'photo' => get_theme_file_uri( '/images/apples-2.jpg' ),
+    ));
   
   ?>
     
