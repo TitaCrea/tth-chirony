@@ -2,7 +2,8 @@
 
 pageBanner(array(
   'altTitle' => 'Actualités', 
-  'subtitle' => 'Soyez les premiers informés !'
+  'subtitle' => 'Soyez les premiers informés !',
+  'photo' => get_theme_file_uri( '/images/apples-2.jpg' ),
 ));
 
 ?>
