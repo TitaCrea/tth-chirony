@@ -26,6 +26,7 @@ nbproject
 *.komodoproject
 .komodotools
 .code-workspace
+.vscode/
 _notes
 dwsync.xml
 
