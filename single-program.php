@@ -10,7 +10,7 @@
   <div class="container container--narrow page-section">
     <div class="metabox metabox--position-up metabox--with-home-link">
           <p>
-            <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link( 'program' ); ?>"><i class="dashicons dashicons-calendar-alt"></i> 
+            <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link( 'program' ); ?>"><i class="dashicons dashicons-controls-back"></i> 
             Cours & Stages</a> 
             <span class="metabox__main">Mis en ligne le <?php the_time('d F Y'); ?> 
               in <?php echo get_the_category_list(', '); ?></span>

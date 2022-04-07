@@ -64,6 +64,18 @@
       </div>
     </footer>
 
+    <!-- Lesson #59 -->
+    <div class="search-overlay">
+      <div class="search-overlay__top">
+        <div class="container">
+          <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+          <input type="text" id="search-term" class="search-term" placeholder="Que cherchez-vous ?">
+          <i class="fa fa-window-close search-overlay__close" aria-hidden="false"></i>
+
+        </div>
+      </div>
+    </div>
+
 <?php 
     // appelle la barre d'admin si user is login in
     // l'endroit des scripts JS
