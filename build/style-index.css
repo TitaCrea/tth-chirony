@@ -817,7 +817,7 @@ body.login {
   top: 6px;
   right: 16px;
 }
-@media (min-width: 530px) {
+@media (min-width: 960px) {
   .site-header__search-trigger {
     top: 4px;
     font-size: 1.4rem;

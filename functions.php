@@ -1,4 +1,20 @@
 <?php 
+// added from Brad's final site
+// require get_theme_file_path('/inc/like-route.php');
+// require get_theme_file_path('/inc/search-route.php');
+
+// function tthchirony_custom_rest() {
+//   register_rest_field('post', 'authorName', array(
+//     'get_callback' => function() {return get_the_author();}
+//   ));
+
+//   register_rest_field('note', 'userNoteCount', array(
+//     'get_callback' => function() {return count_user_posts(get_current_user_id(), 'note');}
+//   ));
+// }
+
+// add_action('rest_api_init', 'tthchirony_custom_rest');
+
 
 // Dynamic Post/Page/CPT Banners
 function pageBanner($args = NULL) {
@@ -27,42 +43,45 @@ function pageBanner($args = NULL) {
     } else {
       $args['photo'] = get_theme_file_uri( '/images/ballons.jpg' );
     }
-  }
+  } ?>
 
-
-
-
-  ?>
-
-  <div class="page-banner">
-    <div class="page-banner__bg-image" 
-      style="background-image: 
-      url(<?php echo $args['photo']; ?>)">
-    </div>
-    <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title"><?php echo $args['altTitle']; ?></h1>
-      <div class="page-banner__intro">
-        <p><?php echo $args['subtitle']; ?></p>
+    <div class="page-banner">
+      <div class="page-banner__bg-image" 
+        style="background-image: 
+        url(<?php echo $args['photo']; ?>)">
+      </div>
+      <div class="page-banner__content container container--narrow">
+        <h1 class="page-banner__title"><?php echo $args['altTitle']; ?></h1>
+        <div class="page-banner__intro">
+          <p><?php echo $args['subtitle']; ?></p>
+        </div>
       </div>
     </div>
-  </div>
-  <?php
-}
+
+<?php }
+
 
 function tthchirony_styles() {
-  // hook 'wp_enqueue_scripts' :
+  // hook 'wp_enqueue_scripts' with add-ons from Brad's final site
+  wp_enqueue_script('googleMap', '//maps.googleapis.com/maps/api/js?key=AIzaSyCkdahwu9WMpA1TMQdVcQUMD8-1avGqvlE', NULL, '1.0', true);
   wp_enqueue_script('tthchirony_main_js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
   
-  wp_enqueue_style('tthchirony_fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i' );
+  wp_enqueue_style('tthchirony_fonts', '////fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i' );
   wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-  // wp_enqueue_style('fontawesome', '//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css');
-    // lien trouvé ici https://www.bootstrapcdn.com/fontawesome/, ça marche pas mieux (pas d'erreur de chargement signalée dans l'inspecteur)
+  // Font Awesome : line from Brad's final site
   wp_enqueue_style('tthchirony_main_styles', get_theme_file_uri( '/build/style-index.css' ));
   wp_enqueue_style('tthchirony_extra_styles', get_theme_file_uri( '/build/index.css' ));
+
+  // wp_localize_script('main-university-js', 'universityData', array(
+  //   'root_url' => get_site_url(),
+  //   'nonce' => wp_create_nonce('wp_rest')
+  // ));
+
 }
 
 add_action('wp_enqueue_scripts', 'tthchirony_styles', 10);
 
+// add-on Tita
 function tth_dev_styles() {
   wp_enqueue_style('tthchirony_dev_styles', get_theme_file_uri( 'style.css'));
 }
@@ -97,14 +116,14 @@ function tthchirony_adjust_queries( $query ) { // WP will define an Object with 
       'meta_key', 'event_beginning_date'
      );
      // pas d'array, c'est un paramètre par 'set()' - par contre, set() accepte les arrays en 2e arg.
-    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'orderby', 'meta_value_num' );
     $query->set( 'order', 'ASC' );
     $query->set( 'meta_query', array( 
       array( 
         'key'   => 'event_beginning_date',  
         'compare' => '>=', 
         'value' => $today, // do not forget to declare this $today variable by copying its declaration too
-        'type'  => 'DATE',
+        'type'  => 'numeric',
       ),
       array( // ajout Tita : 2e Inner Array for the meta_query : seulement les 'events' dont le champ 'contenu-reserve' est vide == public
         'key'   => 'contenu-reserve',
@@ -123,7 +142,10 @@ function tthchirony_adjust_queries( $query ) { // WP will define an Object with 
     $query->set('posts_per_page', -1);
   }
 
-}
+  if (!is_admin() AND is_post_type_archive('place') AND $query->is_main_query()) {
+    $query->set('posts_per_page', -1);
+  }
 
+}
 
 add_action( 'pre_get_posts', 'tthchirony_adjust_queries' );

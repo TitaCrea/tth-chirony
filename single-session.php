@@ -22,6 +22,17 @@
       <?php the_content(); ?>
 
       <?php
+        $relatedPlaces = get_field('related_place');
+        if ($relatedPlaces) {
+          echo '<hr class="section-break">';
+          echo '<p class="">Lieu de la session :</p>';
+          echo '<ul class="link-list min-list">';
+          foreach($relatedPlaces as $place) { ?>
+            <li><a href="<?php echo get_the_permalink($place); ?>"><?php echo get_the_title($place); ?></a></li>
+          <?php }
+          echo '</ul>';
+        }
+        
         $relatedPrograms = get_field('related_programs');
         if ($relatedPrograms) {
           echo '<hr class="section-break">';
